@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="manajemen_proses_main_menu"
+              name="Manajemen Proses"
+              web_icon="manajemen_proses,static/description/icon.png"
+              sequence="0"/>
+
+    <menuitem id="manajemen_proses_menu"
+              name="Perencanaan"
+              parent="manajemen_proses_main_menu"
+              sequence="0"/>
+</odoo>
