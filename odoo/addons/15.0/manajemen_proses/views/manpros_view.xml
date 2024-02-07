@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_manajemen_proses_tree" model="ir.ui.view">
+        <field name="name">manajemen.proses.tree</field>
+        <field name="model">manajemen.proses</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" string="Manajemen Proses"/>
+                <field name="ref"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="type"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_manajemen_proses_form" model="ir.ui.view">
+        <field name="name">manajemen.proses.form</field>
+        <field name="model">manajemen.proses</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="ref"/>
+                        </group>
+                        <group>
+                            <field name="age"/>
+                            <field name="gender"/>
+                            <field name="type"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_manajemen_proses_search" model="ir.ui.view">
+        <field name="name">manajemen.proses.search</field>
+        <field name="model">manajemen.proses</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Manajemen Proses"/>
+                <field name="ref"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="type"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_manajemen_proses" model="ir.actions.act_window">
+        <field name="name">Manajemen Proses</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">manajemen.proses</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create Your Frist Proces Management !
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="pelaposan_analisis"
+              name="Pelaporan Analisis"
+              action="action_manajemen_proses"
+              parent="manajemen_proses_menu"
+              sequence="0"/>
+</odoo>
