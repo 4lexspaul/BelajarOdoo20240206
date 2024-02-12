@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="patient_tag_vip" model="patient.tag">
+        <field name="name">VIP</field>
+    </record>
+
+    <record id="patient_tag_President" model="patient.tag">
+        <field name="name">President</field>
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="patient_tag_bronze" model="patient.tag">
+        <field name="name">Bronze</field>
+    </record>
+
+    <record id="patient_tag_silver" model="patient.tag">
+        <field name="name">Silver</field>
+    </record>
+
+    <record id="patient_tag_gold" model="patient.tag">
+        <field name="name">Gold</field>
+    </record>
+</odoo>

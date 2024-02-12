@@ -1,0 +1,1387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="pdk_report_lppb_template_document">
+        <t t-call="pdk_report_packing.pdk_template_lppb_layout">
+            <style>
+                .pdk-table-header {
+                border-collapse: collapse;
+                width: 100%;
+                font-family: 'Arial', sans-serif;
+                font-size: 8pt;
+                font-weight: lighter;
+                }
+
+                .pdk-table-header td {
+                border: 1px solid black;
+                padding: 0;
+                }
+
+                .pdk-table-main {
+                border-collapse: collapse;
+                width: 100%;
+                font-family: 'Arial', sans-serif;
+                font-size: 8pt;
+                font-weight: lighter;
+                }
+
+                .pdk-table-main td {
+                border: 1px solid black;
+                padding: 4px;
+                }
+
+                .pdk-table-main tbody tr td {
+                border-top: 1px solid transparent;
+                border-bottom: 1px solid transparent;
+                }
+
+                .pdk-table-main tbody tr:first-child td {
+                border-top: 1px solid black;
+                }
+
+                .pdk-table-main tbody tr:first-child td p {
+                margin-top: 2px !important;
+                }
+
+                .pdk-table-main tbody tr:last-child td {
+                border-bottom: 1px solid black;
+                }
+
+                .box-space td {
+                border: 0;
+                }
+
+                .item-header-row th {
+                text-align: center !important;
+                font-weight: bold;
+                margin: 4px;
+                vertical-align: middle;
+                border: 1px solid black;
+                }
+
+                .pdk-sticky-header-table {
+                border: 0;
+                font-family: 'Arial', sans-serif;
+                font-size: 8pt;
+                width: 100%;
+                }
+
+                .pdk-sticky-header-table td {
+                border: 0;
+                }
+
+            </style>
+            <div class="page">
+                <table class="pdk-table-header">
+                    <tbody>
+                        <tr>
+                            <td colspan="6" style="border: 0; width: 100%;">
+                                <table class="pdk-sticky-header-table" style="text-align: left;">
+                                    <td style="width: 60px; border: 0; padding-top: 0; padding-left: 2px;">
+                                        <span>No. PO</span>
+                                        <td style="border: 0; padding-top: 0;">
+                                            <span>:</span>
+                                            <span style="padding-left: 4px;">
+                                                <t t-esc="doc.origin"/>
+                                            </span>
+                                        </td>
+                                        <tr>
+                                            <td style="border: 0; padding-left: 2px;">
+                                                <span>PIC PO</span>
+                                                <td style="border: 0;">
+                                                    <span>:</span>
+                                                    <span style="padding-left: 4px;">
+                                                        <t t-esc="doc.purchase_user_id.name"/>
+                                                    </span>
+                                                </td>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 0; padding-bottom: 0; padding-left: 2px;">
+                                                <span>Supplier</span>
+                                            </td>
+                                            <td style="border: 0; padding-bottom: 0;">
+                                                <span>:</span>
+                                                <span style="padding-left: 4px;"><t t-esc="doc.partner_id.name"/></span>
+                                            </td>
+                                        </tr>
+                                    </td>
+                                </table>
+                            </td>
+                            <td colspan="3" style="border: 0; width: 100%;">
+                                <table class="pdk-sticky-header-table" style="text-align: left;">
+                                    <td style="width: 80px; border: 0; padding-top: 0;">
+                                        <span>No. SJ/PL</span>
+                                        <td style="border: 0; padding-top: 0;">
+                                            <span>:</span>
+                                            <span style="padding-left: 4px;">
+                                                <t t-esc="doc.delivery_note"/>
+                                            </span>
+                                        </td>
+                                        <tr>
+                                            <td style="border: 0;">
+                                                <span>Tgl. Terima</span>
+                                                <td style="border: 0;">
+                                                    <span>:</span>
+                                                    <span style="padding-left: 4px;">
+                                                        <t t-esc="doc.received_date.strftime('%d %b %Y')"/>
+                                                    </span>
+                                                </td>
+                                            </td>
+                                        </tr>
+                                    </td>
+                                </table>
+                            </td>
+                            <td colspan="3" style="border: 0; width: 100%; padding-left: 130px;">
+                                <table class="pdk-sticky-header-table" style="text-align: left;">
+                                    <td style="width: 90px; border: 0; padding-top: 0;">
+                                        <span>No. Transaksi</span>
+                                        <td style="border: 0; padding-top: 0;">
+                                            <span>:</span>
+                                            <span style="padding-left: 4px;">
+                                                <t t-esc="doc.name"/>
+                                            </span>
+                                        </td>
+                                    </td>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="item-header-row">
+                            <td style="width: 3%; border: 0;">
+                            </td>
+                            <td colspan="3" style="width: 35%; border: 0;">
+                            </td>
+                            <td style="width: 6%; border: 0;">
+                            </td>
+                            <td style="width: 6%; border: 0;">
+                                <p style="margin: 0 !important; padding-bottom: 0 !important;"></p>
+                                <p style="font-size: 0px; margin: 0 !important; padding: 0 !important;"></p>
+                            </td>
+                            <td style="width: 6%; border: 0;">
+                                <p style="margin: 0 !important; padding-bottom: 0 !important;"></p>
+                                <p style="font-size: 0px; margin: 0 !important; padding: 0 !important;"></p>
+                            </td>
+                            <td style="width: 6%; border: 0;">
+                                <p style="margin: 0 !important; padding-bottom: 0 !important;"></p>
+                                <p style="font-size: 0px; margin: 0 !important; padding: 0 !important;"></p>
+                            </td>
+                            <td style="width: 6%; border: 0;"></td>
+                            <td style="width: 15%; border: 0;"></td>
+                            <td colspan="4" style="width: 35%; border: 0;"></td>
+                        </tr>
+                    </tbody>
+                    <tr class="box-space">
+                        <td colspan="13" style="border: 0; height: 15px;"/>
+                    </tr>
+                </table>
+                <table class="pdk-table-main">
+                    <thead>
+                        <tr class="item-header-row">
+                            <td colspan="4" style="border-left: 0; border-top: 0; text-align: right !important;
+                                                   font-size: 8pt; padding-right: 10px !important;">
+                                <span style="margin-right: 3px;">Pemeriksaan</span>
+                                <span style="font-size: 8pt;">▶</span>
+                            </td>
+                            <td colspan="10">
+                                <p style="text-align: left; margin: 4px; font-size: 9pt; padding-left: 20px;">
+                                    <span style="font-size: 14pt !important; vertical-align: middle;">□</span>
+                                    <span style="margin-left: 3px; text-decoration: underline;">Jumlah/Berat/Volume</span>
+                                    <span style="margin-left: 13px; font-size: 14pt !important; vertical-align: middle;">□</span>
+                                    <span style="margin-left: 3px; text-decoration: underline;">Dimensi</span>
+                                    <span style="margin-left: 13px; font-size: 14pt !important; vertical-align: middle;">□</span>
+                                    <span style="margin-left: 3px; text-decoration: underline;">Permukaan/Visual</span>
+                                    <span style="margin-left: 13px; font-size: 14pt !important; vertical-align: middle;">□</span>
+                                    <span style="margin-left: 3px; text-decoration: underline;">Kemasan</span>
+                                    <span style="margin-left: 13px; font-size: 14pt !important; vertical-align: middle;">□</span>
+                                    <span style="margin-left: 3px; text-decoration: underline;">Spesifikasi</span>
+                                    <span style="margin-left: 13px; font-size: 14pt !important; vertical-align: middle;">□</span>
+                                    <span style="margin-left: 3px; text-decoration: underline;">Fungsi</span>
+                                    <span style="margin-left: 13px; font-size: 14pt !important; vertical-align: middle;">□</span>
+                                    <span style="margin-left: 3px;">________</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr class="item-header-row">
+                            <th style="width: 2%; max-width: 2%; font-size: 8pt; vertical-align: middle;">
+                                No
+                            </th>
+                            <th colspan="3" style="width: 27%; max-width: 27%; font-size: 8pt; vertical-align: middle;">
+                                Kode - Nama Barang
+                            </th>
+                            <th style="width: 2%; max-width: 2%; font-size: 8pt; vertical-align: middle;">
+                                Sat.
+                            </th>
+                            <th style="width: 4%; max-width: 4%; font-size: 8pt; vertical-align: middle;">
+                                <p style="margin: 4px 0 0 0 !important; padding-bottom: 0 !important;">Jum.</p>
+                                <p style="margin: 0 0 4px 0 !important; padding-top: 0 !important;">SJ/PL</p>
+                            </th>
+                            <th style="width: 4%; max-width: 4% font-size: 8pt; vertical-align: middle;">
+                                <p style="margin: 4px 0 0 0 !important; padding-bottom: 0 !important;">Jum.</p>
+                                <p style="margin: 0 0 4px 0 !important; padding-top: 0 !important;">Terima</p>
+                            </th>
+                            <th style="width: 4%; max-width: 4%; font-size: 8pt; vertical-align: middle;">
+                                <p style="margin: 4px 0 0 0 !important; padding-bottom: 0 !important;">Jum.</p>
+                                <p style="margin: 0 0 4px 0 !important; padding-top: 0 !important;">Periksa</p>
+                            </th>
+                            <th style="width: 4%; max-width: 4%; font-size: 8pt; vertical-align: middle;">
+                                OK
+                            </th>
+                            <th style="width: 4%; max-width: 4%; font-size: 8pt; vertical-align: middle;">
+                                NG
+                            </th>
+                            <th colspan="4" style="width: 40%; max-width: 40%; font-size: 8pt; vertical-align: middle;">
+                                Keterangan
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="line_number" t-value="0"/>
+                        <t t-foreach="doc.move_ids_without_package" t-as="line">
+                            <t t-set="line_number" t-value="line_number + 1"/>
+                            <t t-if="line.quantity_done">
+                                <tr>
+                                    <td style="text-align: center; vertical-align: top; font-size: 9pt;">
+                                        <p style="margin: 15px 0 0 0;"><t t-esc="line_number"/></p>
+                                    </td>
+                                    <td colspan="3" style="text-align: left; vertical-align: top;">
+                                        <p style="margin: 15px 0 0 0">
+                                            <span style="font-size: 9pt;">
+                                                [<t t-esc="line.product_id.code"/>]
+                                            </span>
+                                            <span style="font-size: 9pt;">
+                                                <t t-esc="line.product_id.name"/>
+                                            </span>
+                                        </p>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: top; font-size: 9pt;">
+                                        <p style="margin: 15px 0 0 0; font-size: 9pt;">
+                                            <t t-if="line.quantity_done">
+                                                <t t-esc="line.product_uom.name"/>
+                                            </t>
+                                        </p>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: top;">
+                                    </td>
+                                    <td style="text-align: center; vertical-align: top;">
+                                    </td>
+                                    <td style="text-align: center; vertical-align: top;">
+                                    </td>
+                                    <td style="text-align: center; vertical-align: top;">
+                                    </td>
+                                    <td style="text-align: center; vertical-align: top;">
+                                    </td>
+                                    <td colspan="4" style="text-align: left; vertical-align: top; ">
+                                        <p style="margin: 15px 0 0 0">
+                                            <t t-foreach="line.pr_id.line_ids" t-as="pr">
+                                                <t t-if="pr.product_id.id == line.product_id.id">
+                                                    <t t-esc="pr.analytic_account_id.name"/>
+                                                </t>
+                                            </t>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </t>
+                        </t>
+                    </tbody>
+                    <tr class="box-space">
+                        <td colspan="10" style="border-left: 0; border-right: 0; border-top: 0; border-bottom: 1px solid black; height: 5px;"/>
+                    </tr>
+                    <tr>
+                        <td colspan="6" style="text-align: left !important; vertical-align: middle; border-top: 0 !important; border-bottom: 0 !important;
+                                                           border-left: 1px solid black !important; border-right: 0 !important;">
+                            <p style="font-size: 10pt !important; margin-left: 10px; margin-top: 20px; margin-bottom: 0">Tindakan Ketidaksesuaian (NG)</p>
+                        </td>
+                        <td rowspan="2" colspan="4" style="border-top: 1px solid black !important; border-bottom: 1px solid black !important;
+                                                           border-right: 1px solid black !important; border-left: 0 !important; padding-top: 10px;">
+                            <table class="pdk-sticky-header-table">
+                                <tr>
+                                    <td style="width: 20%; vertical-align: middle; border: 1px solid black; padding: 0; margin: 2px; text-align: center;">
+                                        <p style="margin: 4px 0 4px 0;">Pembelian</p>
+                                    </td>
+                                    <td rowspan="3" style="border: 0; width: 2%; margin: 0; padding: 0;">
+                                    </td>
+                                    <td style="width: 20%; vertical-align: middle; border: 1px solid black; padding: 0; margin: 2px; text-align: center;">
+                                        <p style="margin: 4px 0 4px 0;">PPIC</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%; border-left: 1px solid black; border-right: 1px solid black;
+                                               border-top: 0; border-bottom: 0; padding-top: 45px; padding-bottom: 45px;">
+
+                                    </td>
+                                    <td style="width: 20%; border-left: 1px solid black; border-right: 1px solid black;
+                                               border-top: 0; border-bottom: 0; padding-top: 45px; padding-bottom: 45px;">
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%; margin: 2px; vertical-align: middle; border: 1px solid black; padding: 0; text-align: left;">
+                                        <p style="margin: 4px 0 0 4px;">Tgl.</p>
+                                    </td>
+                                    <td style="width: 20%; margin: 2px; vertical-align: middle; border: 1px solid black; padding: 0; text-align: left;">
+                                        <p style="margin: 4px 0 0 4px;">Tgl.</p>
+                                    </td>
+                                    <td rowspan="3" style="border: 0; width: 1%; margin: 0; padding: 0;">
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td colspan="2" rowspan="2" style="border: 0; margin-left: 50px;">
+                        </td>
+                        <td colspan="2" rowspan="2" style="border: 0; padding-right: 0;">
+                            <table class="pdk-sticky-header-table">
+                                <tr>
+                                    <td style="width: 30%; vertical-align: middle; border: 1px solid black; padding: 0; margin: 2px; text-align: center;">
+                                        <p style="margin: 4px 0 4px 0;">QC</p>
+                                    </td>
+                                    <td rowspan="3" style="border: 0; width: 2%;">
+                                    </td>
+                                    <td style="width: 30%; vertical-align: middle; border: 1px solid black; padding: 0; margin: 2px; text-align: center;">
+                                        <p style="margin: 4px 0 4px 0;">Gudang</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 30%; border-left: 1px solid black; border-right: 1px solid black; margin: 2px
+                                               border-top: 0; border-bottom: 0; padding-top: 45px; padding-bottom: 45px;">
+
+                                    </td>
+                                    <td style="width: 30%; border-left: 1px solid black; border-right: 1px solid black; margin: 2px
+                                               border-top: 0; border-bottom: 0; padding-top: 45px; padding-bottom: 45px;">
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 30%; margin: 2px; vertical-align: middle; border: 1px solid black; padding: 0; text-align: left;">
+                                        <p style="margin: 4px 0 0 4px;">Tgl.</p>
+                                    </td>
+                                    <td style="width: 30%; margin: 2px; vertical-align: middle; border: 1px solid black; padding: 0; text-align: left;">
+                                        <p style="margin: 4px 0 0 4px;">Tgl.</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" style="border-top: 0 !important; border-bottom: 1px solid black !important;
+                                               border-right: 0 !important; border-left: 1px solid black !important;">
+
+                            <table class="pdk-sticky-header-table" style="text-align: left;">
+                                <tr>
+                                    <td style="width: 100px; border: 1px solid white; padding-top: 0;">
+                                        <span style="font-size: 14pt !important; vertical-align: middle;">□</span>
+                                        <span style="margin-left: 2px; text-decoration: underline;">Retur</span>
+                                        <td style="border: 1px solid white; padding-top: 0;">
+                                            <span>:</span>
+                                            <span style="font-weight: lighter !important; font-size: 10pt !important; font-family: 'Arial', sans-serif;">
+                                                _____________________________________________________________
+                                            </span>
+                                        </td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 0;">
+                                        <span style="font-size: 14pt !important; vertical-align: middle;">□</span>
+                                        <span style="margin-left: 2px; text-decoration: underline;">Tidak Retur*</span>
+                                    </td>
+                                    <td style="border: 0; padding-top: 0;">
+                                        <span>:</span>
+                                        <span style="font-weight: lighter !important; font-size: 10pt !important; font-family: 'Arial', sans-serif;">
+                                            _____________________________________________________________
+                                        </span>
+                                        <p style="margin-left: 8px !important; margin-bottom: 0 !important; font-weight: lighter !important; font-size: 10pt !important; font-family: 'Arial', sans-serif;">
+                                            _____________________________________________________________
+                                        </p>
+                                        <p style="margin-left: 8px !important; margin-top: 0 !important; font-weight: lighter !important;
+                                                  font-family: 'Arial', sans-serif; font-size: 9pt; margin-bottom: 0 !important; padding-bottom: 0 !important;">
+                                            *Acceptable (OK) / diRework (NG) / Tidak Diretur (NG) / Tidak Bisa Diretur (NG)
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="pdk_report_surat_lppb_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="pdk_report_packing.pdk_report_lppb_template_document">
+                    <t t-set="o" t-value="o"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>
+
+==================================
+
+revisi
+
+==================================
+
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="pdk_report_lppb_template_document">
+        <t t-call="pdk_report_packing.pdk_template_lppb_layout">
+            <style>
+                .pdk-table-header {
+                border-collapse: collapse;
+                width: 100%;
+                font-family: 'Arial', sans-serif;
+                font-size: 8pt;
+                font-weight: lighter;
+                }
+
+                .pdk-table-header td {
+                border: 1px solid grey;
+                padding: 0;
+                }
+
+                .pdk-table-main {
+                border-collapse: collapse;
+                width: 100%;
+                font-family: 'Arial', sans-serif;
+                font-size: 8pt;
+                font-weight: lighter;
+                }
+
+                .pdk-table-main td {
+                border: 1px solid grey;
+                padding: 4px;
+                }
+
+                .pdk-table-main tbody tr td {
+                border-top: 1px solid transparent;
+                border-bottom: 1px solid transparent;
+                }
+
+                .pdk-table-main tbody tr:first-child td {
+                border-top: 1px solid grey;
+                }
+
+                .pdk-table-main tbody tr:first-child td p {
+                margin-top: 2px !important;
+                }
+
+                .pdk-table-main tbody tr:last-child td {
+                border-bottom: 1px solid grey;
+                }
+
+                .pdk-table-main tbody tr:last-child td p {
+                margin-bottom: 15px !important;
+                }
+
+                .box-space td {
+                border: 0;
+                }
+
+                .item-header-row th {
+                text-align: center !important;
+                font-weight: bold;
+                margin: 4px;
+                vertical-align: middle;
+                border: 1px solid grey;
+                }
+
+                .item-header-row-copy td {
+                margin: 4px;
+                border: 0;
+                }
+
+                .pdk-sticky-header-table {
+                border: 0;
+                font-family: 'Arial', sans-serif;
+                font-size: 8pt;
+                width: 100%;
+                }
+
+                .pdk-sticky-header-table td {
+                border: 0;
+                }
+
+                .pdk-sticky-header-table-NG {
+                font-family: 'Arial', sans-serif;
+                font-size: 8pt;
+                width: 100%;
+                }
+
+                .pdk-sticky-header-table-NG td {
+                border: 0;
+                margin : 0;
+                padding: 0;
+                }
+
+                .pdk-table-footer {
+                border-collapse: collapse;
+                width: 100%;
+                font-family: 'Arial', sans-serif;
+                font-size: 8pt;
+                font-weight: lighter;
+                }
+
+                .pdk-table-footer td {
+                border: 1px solid grey;
+                padding: 4px;
+                }
+
+            </style>
+            <div class="page">
+                <table class="pdk-table-header">
+                    <tbody>
+                        <tr>
+                            <td colspan="6" style="border: 0; width: 100%;">
+                                <table class="pdk-sticky-header-table" style="text-align: left;">
+                                    <td style="width: 60px; border: 0; padding-top: 0; padding-left: 2px;">
+                                        <span>No. PO</span>
+                                        <td style="border: 0; padding-top: 0;">
+                                            <span>:</span>
+                                            <span style="padding-left: 4px;">
+                                                <t t-esc="doc.origin"/>
+                                            </span>
+                                        </td>
+                                        <tr>
+                                            <td style="border: 0; padding-left: 2px;">
+                                                <span>PIC PO</span>
+                                                <td style="border: 0;">
+                                                    <span>:</span>
+                                                    <span style="padding-left: 4px;">
+                                                        <t t-esc="doc.purchase_user_id.name"/>
+                                                    </span>
+                                                </td>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 0; padding-bottom: 0; padding-left: 2px;">
+                                                <span>Supplier</span>
+                                            </td>
+                                            <td style="border: 0; padding-bottom: 0;">
+                                                <span>:</span>
+                                                <span style="padding-left: 4px;"><t t-esc="doc.partner_id.name"/></span>
+                                            </td>
+                                        </tr>
+                                    </td>
+                                </table>
+                            </td>
+                            <td colspan="3" style="border: 0; width: 100%;">
+                                <table class="pdk-sticky-header-table" style="text-align: left;">
+                                    <td style="width: 80px; border: 0; padding-top: 0;">
+                                        <span>No. SJ/PL</span>
+                                        <td style="border: 0; padding-top: 0;">
+                                            <span>:</span>
+                                            <span style="padding-left: 4px;">
+                                                <t t-esc="doc.delivery_note"/>
+                                            </span>
+                                        </td>
+                                        <tr>
+                                            <td style="border: 0;">
+                                                <span>Tgl. Terima</span>
+                                                <td style="border: 0;">
+                                                    <span>:</span>
+                                                    <span style="padding-left: 4px;">
+                                                        <t t-esc="doc.received_date.strftime('%d %b %Y')"/>
+                                                    </span>
+                                                </td>
+                                            </td>
+                                        </tr>
+                                    </td>
+                                </table>
+                            </td>
+                            <td colspan="3" style="border: 0; width: 100%; padding-left: 130px;">
+                                <table class="pdk-sticky-header-table" style="text-align: left;">
+                                    <td style="width: 90px; border: 0; padding-top: 0;">
+                                        <span>No. Transaksi</span>
+                                        <td style="border: 0; padding-top: 0;">
+                                            <span>:</span>
+                                            <span style="padding-left: 4px;">
+                                                <t t-esc="doc.name"/>
+                                            </span>
+                                        </td>
+                                    </td>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="item-header-row">
+                            <td style="width: 3%; border: 0;">
+                            </td>
+                            <td colspan="3" style="width: 35%; border: 0;">
+                            </td>
+                            <td style="width: 6%; border: 0;">
+                            </td>
+                            <td style="width: 6%; border: 0;">
+                                <p style="margin: 0 !important; padding-bottom: 0 !important;"></p>
+                                <p style="font-size: 0px; margin: 0 !important; padding: 0 !important;"></p>
+                            </td>
+                            <td style="width: 6%; border: 0;">
+                                <p style="margin: 0 !important; padding-bottom: 0 !important;"></p>
+                                <p style="font-size: 0px; margin: 0 !important; padding: 0 !important;"></p>
+                            </td>
+                            <td style="width: 6%; border: 0;">
+                                <p style="margin: 0 !important; padding-bottom: 0 !important;"></p>
+                                <p style="font-size: 0px; margin: 0 !important; padding: 0 !important;"></p>
+                            </td>
+                            <td style="width: 6%; border: 0;"></td>
+                            <td style="width: 15%; border: 0;"></td>
+                            <td colspan="4" style="width: 35%; border: 0;"></td>
+                        </tr>
+                    </tbody>
+                    <tr class="box-space">
+                        <td colspan="13" style="border: 0; height: 15px;"/>
+                    </tr>
+                </table>
+                <table class="pdk-table-main">
+                    <thead>
+                        <tr class="item-header-row">
+                            <td colspan="4" style="border-left: 0; border-top: 0; text-align: right !important;
+                                                   font-size: 8pt; padding-right: 10px !important;">
+                                <span style="margin-right: 3px;">Pemeriksaan</span>
+                                <span style="font-size: 8pt;">▶</span>
+                            </td>
+                            <td colspan="10">
+                                <p style="text-align: left; margin: 4px; font-size: 9pt; padding-left: 20px;">
+                                    <span style="font-size: 14pt !important; vertical-align: middle;">□</span>
+                                    <span style="margin-left: 3px; text-decoration: underline;">Jumlah/Berat/Volume</span>
+                                    <span style="margin-left: 13px; font-size: 14pt !important; vertical-align: middle;">□</span>
+                                    <span style="margin-left: 3px; text-decoration: underline;">Dimensi</span>
+                                    <span style="margin-left: 13px; font-size: 14pt !important; vertical-align: middle;">□</span>
+                                    <span style="margin-left: 3px; text-decoration: underline;">Permukaan/Visual</span>
+                                    <span style="margin-left: 13px; font-size: 14pt !important; vertical-align: middle;">□</span>
+                                    <span style="margin-left: 3px; text-decoration: underline;">Kemasan</span>
+                                    <span style="margin-left: 13px; font-size: 14pt !important; vertical-align: middle;">□</span>
+                                    <span style="margin-left: 3px; text-decoration: underline;">Spesifikasi</span>
+                                    <span style="margin-left: 13px; font-size: 14pt !important; vertical-align: middle;">□</span>
+                                    <span style="margin-left: 3px; text-decoration: underline;">Fungsi</span>
+                                    <span style="margin-left: 13px; font-size: 14pt !important; vertical-align: middle;">□</span>
+                                    <span style="margin-left: 3px;">________</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr class="item-header-row">
+                            <th style="width: 2%; max-width: 2%; font-size: 8pt; vertical-align: middle;">
+                                No
+                            </th>
+                            <th colspan="3" style="width: 27%; max-width: 27%; font-size: 8pt; vertical-align: middle;">
+                                Kode - Nama Barang
+                            </th>
+                            <th style="width: 2%; max-width: 2%; font-size: 8pt; vertical-align: middle;">
+                                Sat.
+                            </th>
+                            <th style="width: 4%; max-width: 4%; font-size: 8pt; vertical-align: middle;">
+                                <p style="margin: 4px 0 0 0 !important; padding-bottom: 0 !important;">Jum.</p>
+                                <p style="margin: 0 0 4px 0 !important; padding-top: 0 !important;">SJ/PL</p>
+                            </th>
+                            <th style="width: 4%; max-width: 4% font-size: 8pt; vertical-align: middle;">
+                                <p style="margin: 4px 0 0 0 !important; padding-bottom: 0 !important;">Jum.</p>
+                                <p style="margin: 0 0 4px 0 !important; padding-top: 0 !important;">Terima</p>
+                            </th>
+                            <th style="width: 4%; max-width: 4%; font-size: 8pt; vertical-align: middle;">
+                                <p style="margin: 4px 0 0 0 !important; padding-bottom: 0 !important;">Jum.</p>
+                                <p style="margin: 0 0 4px 0 !important; padding-top: 0 !important;">Periksa</p>
+                            </th>
+                            <th style="width: 4%; max-width: 4%; font-size: 8pt; vertical-align: middle;">
+                                OK
+                            </th>
+                            <th style="width: 4%; max-width: 4%; font-size: 8pt; vertical-align: middle;">
+                                NG
+                            </th>
+                            <th colspan="4" style="width: 40%; max-width: 40%; font-size: 8pt; vertical-align: middle;">
+                                Keterangan
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="line_number" t-value="0"/>
+                        <t t-foreach="doc.move_ids_without_package" t-as="line">
+                            <t t-set="line_number" t-value="line_number + 1"/>
+                            <t t-if="line.quantity_done">
+                                <tr>
+                                    <td style="text-align: center; vertical-align: top; font-size: 9pt;">
+                                        <p style="margin: 15px 0 0 0;"><t t-esc="line_number"/></p>
+                                    </td>
+                                    <td colspan="3" style="text-align: left; vertical-align: top;">
+                                        <p style="margin: 15px 0 0 0">
+                                            <span style="font-size: 9pt;">
+                                                [<t t-esc="line.product_id.code"/>]
+                                            </span>
+                                            <span style="font-size: 9pt;">
+                                                <t t-esc="line.product_id.name"/>
+                                            </span>
+                                        </p>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: top; font-size: 9pt;">
+                                        <p style="margin: 15px 0 0 0; font-size: 9pt;">
+                                            <t t-if="line.quantity_done">
+                                                <t t-esc="line.product_uom.name"/>
+                                            </t>
+                                        </p>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: top;">
+                                    </td>
+                                    <td style="text-align: center; vertical-align: top;">
+                                    </td>
+                                    <td style="text-align: center; vertical-align: top;">
+                                    </td>
+                                    <td style="text-align: center; vertical-align: top;">
+                                    </td>
+                                    <td style="text-align: center; vertical-align: top;">
+                                    </td>
+                                    <td colspan="4" style="text-align: left; vertical-align: top; ">
+                                        <p style="margin: 15px 0 0 0">
+                                            <t t-foreach="line.pr_id.line_ids" t-as="pr">
+                                                <t t-if="pr.product_id.id == line.product_id.id">
+                                                    <t t-esc="pr.analytic_account_id.name"/>
+                                                </t>
+                                            </t>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </t>
+                        </t>
+                    </tbody>
+                    <tr class="box-space">
+                        <td colspan="14" style="border: 0; height: 5px;"/>
+                    </tr>
+                </table>
+                <table class="pdk-table-footer">
+                    <tr>
+                        <td style="border-top: 1px solid grey !important; border-bottom: 1px solid grey !important;
+                                   border-right: 0 !important; border-left: 1px solid grey !important;
+                                   margin: 0; padding: 0 0 0 4px; width: 48%;">
+                            <table class="pdk-sticky-header-table" style="text-align: left;">
+                                <tr>
+                                    <td colspan="2" style="text-align: left !important; border: 0; margin: 0; vertical-align: middle;">
+                                        <p style="font-size: 8pt !important; padding: 0 0 0 5px;">Tindakan Ketidaksesuaian (NG)</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 100px; border: 0; padding: 0 0 0 5px; margin: 0;">
+                                        <span style="font-size: 14pt !important; vertical-align: middle;">□</span>
+                                        <span style="margin-left: 2px; text-decoration: underline;">Retur</span>
+                                        <td style="border: 1px solid white; padding: 0; margin: 0;">
+                                            <span>:</span>
+                                            <span style="font-weight: lighter !important; font-size: 10pt !important; font-family: 'Arial', sans-serif;">
+                                                _____________________________________________________________
+                                            </span>
+                                        </td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 100px; border: 0; padding: 0 0 0 5px; margin: 0;">
+                                        <span style="font-size: 14pt !important; vertical-align: middle;">□</span>
+                                        <span style="margin-left: 2px; text-decoration: underline;">Tidak Retur*</span>
+                                    </td>
+                                    <td style="border: 0; padding: 0; margin: 0;">
+                                        <span>:</span>
+                                        <span style="font-weight: lighter !important; font-size: 10pt !important; font-family: 'Arial', sans-serif;">
+                                            _____________________________________________________________
+                                        </span>
+                                        <p style="margin-left: 8px !important; margin-top: 20px !important; font-weight: lighter !important;
+                                                  font-family: 'Arial', sans-serif; font-size: 9pt; margin-bottom: 0 !important; padding-bottom: 0 !important;">
+                                            *Acceptable (OK) / diRework (NG) / Tidak Diretur (NG) / Tidak Bisa Diretur (NG)
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 22%; border-top: 1px solid grey !important; border-bottom: 1px solid grey !important;
+                                                           border-right: 1px solid grey !important; border-left: 0 !important;
+                                                           padding-top: 10px; padding-bottom: 10px; margin: 0;">
+                            <table class="pdk-sticky-header-table-NG">
+                                <tr>
+                                    <td style="width: 20%; margin: 0 !important; padding: 0 !important; vertical-align: middle; border: 1px solid grey; text-align: center;">
+                                        <p style="padding: 8px 0 0 0;">Pembelian</p>
+                                    </td>
+                                    <td rowspan="3" style="border: 0; width: 2%; margin-bottom: 0 !important;">
+                                    </td>
+                                    <td style="width: 20%; margin: 0 !important; padding: 0 !important; vertical-align: middle; border: 1px solid grey; text-align: center;">
+                                        <p style="padding: 8px 0 0 0;">Pembelian</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-left: 1px solid grey; border-right: 1px solid grey;
+                                               border-top: 0; border-bottom: 0; padding-top: 80px;">
+
+                                    </td>
+                                    <td style="border-left: 1px solid grey; border-right: 1px solid grey;
+                                               border-top: 0; border-bottom: 0; padding-top: 80px;">
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="margin: 0 !important; padding: 0 !important; vertical-align: middle; border: 1px solid grey; text-align: left;">
+                                        <p style="padding: 8px 0 0 2px;">Tgl.</p>
+                                    </td>
+                                    <td style="margin: 0 !important; padding: 0 !important; vertical-align: middle; border: 1px solid grey; text-align: left;">
+                                        <p style="padding: 8px 0 0 2px;">Tgl.</p>
+                                    </td>
+                                    <td rowspan="3" style="border: 0; width: 1%;">
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="border: 0; width: 7%; margin: 0; padding: 0;">
+                        </td>
+                        <td style="width: 40%; border: 0; padding: 0; margin: 0;">
+                            <table class="pdk-sticky-header-table-NG">
+                                <tr>
+                                    <td style="margin: 0 !important; padding: 0 !important; width: 30%; vertical-align: middle; border: 1px solid grey; margin: 0; text-align: center;">
+                                        <p style="padding: 8px 0 2px 0;">QC</p>
+                                    </td>
+                                    <td rowspan="3" style="border: 0; width: 3%;">
+                                    </td>
+                                    <td style="margin: 0 !important; padding: 0 !important; width: 30%; vertical-align: middle; border: 1px solid grey; margin: 0; text-align: center;">
+                                        <p style="padding: 8px 0 2px 0;">Gudang</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-left: 1px solid grey; border-right: 1px solid grey;
+                                               border-top: 0; border-bottom: 0; padding-top: 80px;">
+
+                                    </td>
+                                    <td style="border-left: 1px solid grey; border-right: 1px solid grey;
+                                               border-top: 0; border-bottom: 0; padding-top: 80px;">
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="margin: 0 !important; padding: 0 !important; vertical-align: middle; border: 1px solid grey; text-align: left;">
+                                        <p style="padding: 8px 0 0 2px;">Tgl.</p>
+                                    </td>
+                                    <td style="margin: 0 !important; padding: 0 !important; vertical-align: middle; border: 1px solid grey; text-align: left;">
+                                        <p style="padding: 8px 0 0 2px;">Tgl.</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="pdk_report_surat_lppb_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="pdk_report_packing.pdk_report_lppb_template_document">
+                    <t t-set="o" t-value="o"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>
+
+==========================================================
+
+template header footer
+
+==========================================================
+
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="pdk_template_header_footer_report_lppb">
+        <div t-attf-class="header" t-att-style="report_header_style">
+            <div class="row" style="border: 1px solid grey; margin: 0;">
+                <div class="col-2 text-left" style="margin-top: 10px; margin-bottom: 10px;">
+                    <img class="pudak-image"
+                         style="height: 45px; width: 155px; display: block;"
+                         t-att-src="'%s/pdk_report_purchase_order/static/assets/img/pudak-logo-black.png' % doc.env['ir.config_parameter'].sudo().get_param('web.base.url')"/>
+                </div>
+                <div class="col-8 text-center">
+                    <div style="vertical-align: middle;">
+                        <p style="text-align: center; padding-top: 20px; font-weight: bold; font-family: 'Arial',
+                                   sans-serif; vertical-align: middle; font-size: 15pt;">
+                            LAPORAN PEMERIKSAAN DAN PENERIMAAN BARANG (LPPB)
+                        </p>
+                    </div>
+                </div>
+                <div class="col-2 text-right">
+                    <div>
+                        <p style="margin: 0 !important; padding: 10px 0 0 0; font-size: 8pt; font-weight: lighter; text-align: left;
+                                  font-family: 'Arial', sans-serif; vertical-align: bottom;">No. Form
+                            <span style="margin-left: 9px;">:</span>
+                            <span style="margin-left: 4px; font-weight: lighter;">FM-PIC-04-01</span>
+                        </p>
+                        <p style="margin: 0 !important; font-size: 8pt; font-weight: lighter; text-align: left;
+                                  font-family: 'Arial', sans-serif; vertical-align: bottom;">No. Revisi
+                            <span style="margin-left: 5px;">:</span>
+                            <span style="font-weight: lighter;"> </span>
+                        </p>
+                        <p style="margin: 0 !important; padding: 0 0 5px 0; font-size: 8pt; font-weight: lighter; text-align: left;
+                                  font-family: 'Arial', sans-serif; vertical-align: bottom;">Tgl. Revisi
+                            <span style="margin-left: 4px;">:</span>
+                            <span style="font-weight: lighter;"> </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+             t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-out="0"/>
+        </div>
+
+        <div class="page">
+
+        </div>
+
+        <!--<div t-attf-class="footer" style="width: 100%;">
+            <div class="row" style="font-size: 8pt; font-family: Arial, sans-serif; padding: 6px 0 0 0;">
+                <div class="col-xs-6 text-right">
+                    <p> </p>
+                </div>
+                <div t-if="report_type == 'pdf'">
+                    <p>
+                        Page <span class="page"/>
+                        of
+                        <span class="topage"/>
+                    </p>
+                </div>
+            </div>
+        </div>-->
+    </template>
+
+    <template id="pdk_template_lppb_layout">
+        <t t-call="pdk_report_packing.pdk_template_header_footer_report_lppb"><t t-out="0"/></t>
+    </template>
+</odoo>
+
+=========================================================
+
+report lppb
+
+=========================================================
+
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="pdk_report_lppb_template_document">
+        <t t-call="pdk_report_packing.pdk_template_lppb_layout">
+            <style>
+                .pdk-table-header {
+                border-collapse: collapse;
+                width: 100%;
+                font-family: 'Arial', sans-serif;
+                font-size: 8pt;
+                font-weight: lighter;
+                }
+
+                .pdk-table-header td {
+                border: 1px solid grey;
+                padding: 0;
+                }
+
+                .pdk-table-main {
+                border-collapse: collapse;
+                width: 100%;
+                font-family: 'Arial', sans-serif;
+                font-size: 8pt;
+                font-weight: lighter;
+                }
+
+                .pdk-table-main td {
+                border: 1px solid grey;
+                padding: 0;
+                }
+
+                .pdk-table-main tbody tr td {
+                border-top: 1px solid transparent;
+                border-bottom: 1px solid transparent;
+                }
+
+                .pdk-table-main tbody tr:first-child td {
+                border-top: 1px solid grey;
+                padding: 4px 4px 0 4px !important;
+                }
+
+                .pdk-table-main tbody tr:last-child td {
+                border-bottom: 1px solid grey;
+                padding: 29px 4px 29px 4px !important;
+                }
+
+                .box-space td {
+                border: 0;
+                }
+
+                .item-header-row th {
+                text-align: center !important;
+                font-weight: bold;
+                margin: 4px;
+                vertical-align: middle;
+                border: 1px solid grey;
+                }
+
+                .item-header-row-copy td {
+                margin: 4px;
+                border: 0;
+                }
+
+                .pdk-sticky-header-table {
+                border: 0;
+                font-family: 'Arial', sans-serif;
+                font-size: 8pt;
+                width: 100%;
+                }
+
+                .pdk-sticky-header-table td {
+                border: 0;
+                }
+
+                .pdk-sticky-header-table-NG {
+                font-family: 'Arial', sans-serif;
+                font-size: 8pt;
+                width: 100%;
+                }
+
+                .pdk-sticky-header-table-NG td {
+                border: 0;
+                margin : 0;
+                padding: 0;
+                }
+
+                .pdk-table-footer {
+                border-collapse: collapse;
+                width: 100%;
+                font-family: 'Arial', sans-serif;
+                font-size: 8pt;
+                font-weight: lighter;
+                }
+
+                .pdk-table-footer td {
+                border: 1px solid grey;
+                padding: 4px;
+                }
+
+            </style>
+            <div class="page">
+                <table class="pdk-table-header">
+                    <tbody>
+                        <tr>
+                            <td colspan="6" style="border: 0; width: 100%;">
+                                <table class="pdk-sticky-header-table" style="text-align: left;">
+                                    <td style="width: 60px; border: 0; padding-top: 0; padding-left: 2px;">
+                                        <span>No. PO</span>
+                                        <td style="border: 0; padding-top: 0;">
+                                            <span>:</span>
+                                            <span style="padding-left: 4px;">
+                                                <t t-esc="doc.origin"/>
+                                            </span>
+                                        </td>
+                                        <tr>
+                                            <td style="border: 0; padding-left: 2px;">
+                                                <span>PIC PO</span>
+                                                <td style="border: 0;">
+                                                    <span>:</span>
+                                                    <span style="padding-left: 4px;">
+                                                        <t t-esc="doc.purchase_user_id.name"/>
+                                                    </span>
+                                                </td>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 0; padding-bottom: 0; padding-left: 2px;">
+                                                <span>Supplier</span>
+                                            </td>
+                                            <td style="border: 0; padding-bottom: 0;">
+                                                <span>:</span>
+                                                <span style="padding-left: 4px;"><t t-esc="doc.partner_id.name"/></span>
+                                            </td>
+                                        </tr>
+                                    </td>
+                                </table>
+                            </td>
+                            <td colspan="3" style="border: 0; width: 100%;">
+                                <table class="pdk-sticky-header-table" style="text-align: left;">
+                                    <td style="width: 80px; border: 0; padding-top: 0;">
+                                        <span>No. SJ/PL</span>
+                                        <td style="border: 0; padding-top: 0;">
+                                            <span>:</span>
+                                            <span style="padding-left: 4px;">
+                                                <t t-esc="doc.delivery_note"/>
+                                            </span>
+                                        </td>
+                                        <tr>
+                                            <td style="border: 0;">
+                                                <span>Tgl. Terima</span>
+                                                <td style="border: 0;">
+                                                    <span>:</span>
+                                                    <span style="padding-left: 4px;">
+                                                        <t t-esc="doc.received_date.strftime('%d %b %Y')"/>
+                                                    </span>
+                                                </td>
+                                            </td>
+                                        </tr>
+                                    </td>
+                                </table>
+                            </td>
+                            <td colspan="3" style="border: 0; width: 100%; padding-left: 130px;">
+                                <table class="pdk-sticky-header-table" style="text-align: left;">
+                                    <td style="width: 90px; border: 0; padding-top: 0;">
+                                        <span>No. Transaksi</span>
+                                        <td style="border: 0; padding-top: 0;">
+                                            <span>:</span>
+                                            <span style="padding-left: 4px;">
+                                                <t t-esc="doc.name"/>
+                                            </span>
+                                        </td>
+                                    </td>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr class="item-header-row">
+                            <td style="width: 3%; border: 0;">
+                            </td>
+                            <td colspan="3" style="width: 35%; border: 0;">
+                            </td>
+                            <td style="width: 6%; border: 0;">
+                            </td>
+                            <td style="width: 6%; border: 0;">
+                                <p style="margin: 0 !important; padding-bottom: 0 !important;"></p>
+                                <p style="font-size: 0px; margin: 0 !important; padding: 0 !important;"></p>
+                            </td>
+                            <td style="width: 6%; border: 0;">
+                                <p style="margin: 0 !important; padding-bottom: 0 !important;"></p>
+                                <p style="font-size: 0px; margin: 0 !important; padding: 0 !important;"></p>
+                            </td>
+                            <td style="width: 6%; border: 0;">
+                                <p style="margin: 0 !important; padding-bottom: 0 !important;"></p>
+                                <p style="font-size: 0px; margin: 0 !important; padding: 0 !important;"></p>
+                            </td>
+                            <td style="width: 6%; border: 0;"></td>
+                            <td style="width: 15%; border: 0;"></td>
+                            <td colspan="4" style="width: 35%; border: 0;"></td>
+                        </tr>
+                    </tbody>
+                    <tr class="box-space">
+                        <td colspan="13" style="border: 0; height: 5px;"/>
+                    </tr>
+                </table>
+                <table class="pdk-table-main">
+                    <thead>
+                        <tr class="item-header-row">
+                            <td colspan="5" style="border-left: 0; border-top: 0; text-align: right !important;
+                                                   font-size: 8pt; padding-right: 10px !important;">
+                                <span style="margin-right: 3px;">Pemeriksaan</span>
+                                <span style="font-size: 8pt;">▶</span>
+                            </td>
+                            <td colspan="10">
+                                <p style="text-align: left; margin: 4px; font-size: 8pt; padding-left: 20px;">
+                                    <span style="font-size: 14pt !important; vertical-align: middle;">□</span>
+                                    <span style="margin-left: 3px; text-decoration: underline;">Jumlah/Berat/Volume</span>
+                                    <span style="margin-left: 13px; font-size: 14pt !important; vertical-align: middle;">□</span>
+                                    <span style="margin-left: 3px; text-decoration: underline;">Dimensi</span>
+                                    <span style="margin-left: 13px; font-size: 14pt !important; vertical-align: middle;">□</span>
+                                    <span style="margin-left: 3px; text-decoration: underline;">Permukaan/Visual</span>
+                                    <span style="margin-left: 13px; font-size: 14pt !important; vertical-align: middle;">□</span>
+                                    <span style="margin-left: 3px; text-decoration: underline;">Kemasan</span>
+                                    <span style="margin-left: 13px; font-size: 14pt !important; vertical-align: middle;">□</span>
+                                    <span style="margin-left: 3px; text-decoration: underline;">Spesifikasi</span>
+                                    <span style="margin-left: 13px; font-size: 14pt !important; vertical-align: middle;">□</span>
+                                    <span style="margin-left: 3px; text-decoration: underline;">Fungsi</span>
+                                    <span style="margin-left: 13px; font-size: 14pt !important; vertical-align: middle;">□</span>
+                                    <span style="margin-left: 3px;">________</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr class="item-header-row">
+                            <th style="width: 2%; max-width: 2%; font-size: 8pt; vertical-align: middle;">
+                                No
+                            </th>
+                            <th colspan="3" style="width: 27%; max-width: 27%; font-size: 8pt; vertical-align: middle;">
+                                Kode - Nama Barang
+                            </th>
+                            <th style="width: 2%; max-width: 2%; font-size: 8pt; vertical-align: middle;">
+                                Sat.
+                            </th>
+                            <th style="width: 4%; max-width: 4%; font-size: 8pt; vertical-align: middle;">
+                                <p style="margin: 4px 0 0 0 !important; padding-bottom: 0 !important;">Jum.</p>
+                                <p style="margin: 0 0 4px 0 !important; padding-top: 0 !important;">SJ/PL</p>
+                            </th>
+                            <th style="width: 4%; max-width: 4% font-size: 8pt; vertical-align: middle;">
+                                <p style="margin: 4px 0 0 0 !important; padding-bottom: 0 !important;">Jum.</p>
+                                <p style="margin: 0 0 4px 0 !important; padding-top: 0 !important;">Terima</p>
+                            </th>
+                            <th style="width: 4%; max-width: 4%; font-size: 8pt; vertical-align: middle;">
+                                <p style="margin: 4px 0 0 0 !important; padding-bottom: 0 !important;">Jum.</p>
+                                <p style="margin: 0 0 4px 0 !important; padding-top: 0 !important;">Periksa</p>
+                            </th>
+                            <th style="width: 4%; max-width: 4%; font-size: 8pt; vertical-align: middle;">
+                                OK
+                            </th>
+                            <th style="width: 4%; max-width: 4%; font-size: 8pt; vertical-align: middle;">
+                                NG
+                            </th>
+                            <th colspan="4" style="width: 40%; max-width: 40%; font-size: 8pt; vertical-align: middle;">
+                                Keterangan
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="line_number" t-value="0"/>
+                        <t t-foreach="doc.move_ids_without_package" t-as="line">
+                            <t t-set="line_number" t-value="line_number + 1"/>
+                            <t t-if="line.quantity_done">
+                                <tr>
+                                    <td style="text-align: center; padding: 29px 4px 0 4px; margin: 0; vertical-align: top; font-size: 9pt;">
+                                        <t t-esc="line_number"/>
+                                    </td>
+                                    <td colspan="3" style="text-align: left; vertical-align: top; padding: 29px 4px 0 4px; margin: 0; font-size: 9pt;">
+                                        <span style="font-size: 9pt;">
+                                            [<t t-esc="line.product_id.code"/>]
+                                        </span>
+                                        <span style="font-size: 9pt;">
+                                            <t t-esc="line.product_id.name"/>
+                                        </span>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: top; padding: 29px 4px 0 4px; margin: 0; font-size: 9pt;">
+                                            <t t-esc="line.product_uom.name"/>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: top; padding: 29px 4px 0 4px; margin: 0; font-size: 9pt;">
+                                        <t t-esc="'{:.2f}'.format(line.quantity_done)"/>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: top;">
+                                    </td>
+                                    <td style="text-align: center; vertical-align: top;">
+                                    </td>
+                                    <td style="text-align: center; vertical-align: top;">
+                                    </td>
+                                    <td style="text-align: center; vertical-align: top;">
+                                    </td>
+                                    <td colspan="4" style="padding: 29px 4px 0 4px; margin: 0; text-align: left; vertical-align: top; ">
+                                        <t t-foreach="line.pr_id.line_ids" t-as="pr">
+                                            <t t-if="pr.product_id.id == line.product_id.id">
+                                                <t t-esc="pr.analytic_account_id.name"/>
+                                            </t>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </t>
+                        </t>
+                    </tbody>
+                </table>
+                <table class="pdk-table-footer" style="margin: 10px 0 0 0;">
+                    <tr>
+                        <td style="border-top: 1px solid grey !important; border-bottom: 1px solid grey !important;
+                                   border-right: 0 !important; border-left: 1px solid grey !important;
+                                   margin: 0; padding: 0 0 0 4px; width: 48%;">
+                            <table class="pdk-sticky-header-table" style="text-align: left;">
+                                <tr>
+                                    <p style="padding: 10px 0 0 5px; font-size: 8pt !important;">Tindakan Ketidaksesuaian (NG)</p>
+                                    <td style="width: 100px; border: 0; padding: 0 0 0 5px; margin: 0;">
+                                        <span style="font-size: 14pt !important; vertical-align: middle;">□</span>
+                                        <span style="margin-left: 2px; text-decoration: underline;">Retur</span>
+                                        <td style="border: 1px solid white; padding: 0; margin: 0;">
+                                            <span>:</span>
+                                            <span style="font-weight: lighter !important; font-size: 10pt !important; font-family: 'Arial', sans-serif;">
+                                                _______________________________________________________________
+                                            </span>
+                                        </td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 100px; border: 0; padding: 0 0 0 5px; margin: 0;">
+                                        <span style="font-size: 14pt !important; vertical-align: middle;">□</span>
+                                        <span style="margin-left: 2px; text-decoration: underline;">Tidak Retur*</span>
+                                    </td>
+                                    <td style="border: 0; padding: 0; margin: 0;">
+                                        <span>:</span>
+                                        <span style="font-weight: lighter !important; font-size: 10pt !important; font-family: 'Arial', sans-serif;">
+                                            _______________________________________________________________
+                                        </span>
+                                        <p style="margin-left: 8px !important; margin-top: 15px !important; font-weight: lighter !important;
+                                                  font-family: 'Arial', sans-serif; font-size: 9pt; margin-bottom: 0 !important; padding-bottom: 0 !important; font-style: italic;">
+                                            *Acceptable (OK) / diRework (NG) / Tidak Diretur (NG) / Tidak Bisa Diretur (NG)
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 22%; border-top: 1px solid grey !important; border-bottom: 1px solid grey !important;
+                                                           border-right: 1px solid grey !important; border-left: 0 !important;
+                                                           padding: 10px 0 10px 0; margin: 0;">
+                            <table class="pdk-sticky-header-table-NG">
+                                <tr>
+                                    <td style="width: 20%; margin: 0 !important; padding: 0 !important; vertical-align: middle; border: 1px solid grey; text-align: center;">
+                                        Pembelian
+                                    </td>
+                                    <td rowspan="3" style="border: 0; width: 1%; margin-bottom: 0 !important;">
+                                    </td>
+                                    <td style="width: 20%; margin: 0 !important; padding: 0 !important; vertical-align: middle; border: 1px solid grey; text-align: center;">
+                                        PPIC
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-left: 1px solid grey; border-right: 1px solid grey;
+                                               border-top: 0; border-bottom: 0; padding-top: 80px;">
+
+                                    </td>
+                                    <td style="border-left: 1px solid grey; border-right: 1px solid grey;
+                                               border-top: 0; border-bottom: 0; padding-top: 80px;">
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="margin: 0 !important; padding: 2px !important; vertical-align: middle; border: 1px solid grey; text-align: left;">
+                                        Tgl.
+                                    </td>
+                                    <td style="margin: 0 !important; padding: 2px !important; vertical-align: middle; border: 1px solid grey; text-align: left;">
+                                        Tgl.
+                                    </td>
+                                    <td rowspan="3" style="border: 0; width: 1%;">
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="border: 0; width: 9%; margin: 0; padding: 0;">
+                        </td>
+                        <td style="width: 40%; border: 0; padding: 0; margin: 0;">
+                            <table class="pdk-sticky-header-table-NG">
+                                <tr>
+                                    <td style="margin: 0 !important; padding: 0 !important; width: 30%; vertical-align: middle; border: 1px solid grey; margin: 0; text-align: center;">
+                                        QC
+                                    </td>
+                                    <td rowspan="3" style="border: 0; width: 3%;">
+                                    </td>
+                                    <td style="margin: 0 !important; padding: 0 !important; width: 30%; vertical-align: middle; border: 1px solid grey; margin: 0; text-align: center;">
+                                        Gudang
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-left: 1px solid grey; border-right: 1px solid grey;
+                                               border-top: 0; border-bottom: 0; padding-top: 80px;">
+
+                                    </td>
+                                    <td style="border-left: 1px solid grey; border-right: 1px solid grey;
+                                               border-top: 0; border-bottom: 0; padding-top: 80px;">
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="margin: 0 !important; padding: 2px !important; vertical-align: middle; border: 1px solid grey; text-align: left;">
+                                        Tgl.
+                                    </td>
+                                    <td style="margin: 0 !important; padding: 2px !important; vertical-align: middle; border: 1px solid grey; text-align: left;">
+                                        Tgl.
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="pdk_report_surat_lppb_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="pdk_report_packing.pdk_report_lppb_template_document">
+                    <t t-set="o" t-value="o"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

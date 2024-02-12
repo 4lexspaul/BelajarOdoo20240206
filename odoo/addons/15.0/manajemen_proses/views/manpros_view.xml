@@ -8,7 +8,7 @@
                 <field name="name" string="Manajemen Proses"/>
                 <field name="ref"/>
                 <field name="age"/>
-                <field name="gender"/>
+                <field name="metode"/>
                 <field name="type"/>
             </tree>
         </field>
@@ -27,8 +27,9 @@
                         </group>
                         <group>
                             <field name="age"/>
-                            <field name="gender"/>
+                            <field name="metode"/>
                             <field name="type"/>
+                            <field name="active" invisible="1"/>
                         </group>
                     </group>
                 </sheet>
@@ -41,11 +42,22 @@
         <field name="model">manajemen.proses</field>
         <field name="arch" type="xml">
             <search>
-                <field name="name" string="Manajemen Proses"/>
+                <field name="name" string="Manajemen Proses"
+                       filter_domain="['|', ('name','ilike',self), ('name','ilike',self)"/>
                 <field name="ref"/>
                 <field name="age"/>
-                <field name="gender"/>
+                <field name="metode"/>
+                <filter name="filter_kuantitatif" string="Kuantitatif" domain="[('metode', '=', 'kuantitatif')]"/>
+                <filter name="filter_kualitatif" string="Kualitatif" domain="[('metode', '=', 'kualitatif')]"/>
                 <field name="type"/>
+                <filter name="filter_high" string="High" domain="[('metode', '=', 'high')]"/>
+                <filter name="filter_middle" string="Middle" domain="[('metode', '=', 'middle')]"/>
+                <filter name="filter_low" string="Low" domain="[('metode', '=', 'low')]"/>
+                <separator/>
+                <filter name="filter_archived" string="Archived" domain="[('active',  '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Metode" name="group_by_metode" domain="[]" context="{'group_by':'metode'}"/>
+                </group>
             </search>
         </field>
     </record>
@@ -65,6 +77,12 @@
 
     <menuitem id="pelaposan_analisis"
               name="Pelaporan Analisis"
+              action="action_manajemen_proses"
+              parent="manajemen_proses_menu"
+              sequence="0"/>
+
+    <menuitem id="analisis_review"
+              name="Analisis Review"
               action="action_manajemen_proses"
               parent="manajemen_proses_menu"
               sequence="0"/>

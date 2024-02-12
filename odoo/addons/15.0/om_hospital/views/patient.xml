@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="patient_tree" model="ir.ui.view">
+        <!--        format penamaan name adalah module.form-->
+        <field name="name">hospital.patient.tree</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <!--            di bawah bisa form, kanban, atau tree-->
+            <tree>
+                <field name="patient_code" string="Kode Pasien"/>
+                <field name="name" string="Nama Pasien" readonly="1" decoration-bf="1"/>
+                <field name="age" string="Umur"/>
+                <field name="gender" string="Jenis Kelamin"/>
+                <field name="note"/>
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="patient_form" model="ir.ui.view">
+        <!--        format penamaan name adalah module.form-->
+        <field name="name">hospital.patient.form</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <!--            di bawah bisa form, kanban, atau tree-->
+            <form string="Form Pasien">
+                <!--                sheet tag membuat data yang kita pilih seperti di lembaran-->
+                <sheet>
+                    <!--<div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>-->
+       <!--             <field name="image" widget="image" class="oe_avatar"/>-->
+                    <group>
+                        <group>
+                            <field name="name" required="1"/>
+                            <field name="age" required="1"/>
+                            <field name="gender" required="1"/>
+                            <field name="date_of_birth" required="1"/>
+                        </group>
+                        <group>
+                            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            <field name="note"/>
+                            <field name="patient_code"/>
+
+                            <!--                            active di bawah untuk filter apakah data termasuk archive atau bukan-->
+                            <field name="active" attrs="{'invisible': True, 'readonly': [('active', '!=', True)]}"/>
+                        </group>
+                    </group>
+                </sheet>
+                <!--                chatter-->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--    search view-->
+    <record id="patient_search" model="ir.ui.view">
+        <field name="name">hospital.patient.search</field>
+        <field name="model">hospital.patient</field>
+        <field name="priority">32</field>
+        <field name="arch" type="xml">
+            <search string="Search Pasien">
+                <field name="name" string="Nama Pelanggan" filter_domain="['|', ('name','ilike',self), ('gender','ilike',self)]"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="patient_code"/>
+                <field name="note"/>
+                <filter name="filter_pria" string="Pria" domain="[('gender', '=', 'pria')]"/>
+                <filter name="filter_wanita" string="Wanita" domain="[('gender', '=', 'wanita')]"/>
+                <!--<separator/>
+                <filter name="filter_manula" string="Manula" domain="[('age', '&gt;=', '60')]"/>-->
+                <separator/>
+                <filter name="filter_archived" string="Archived" domain="[('active', '=', False)]"/>
+                <!-- <group expand="1" string="Group By">
+                     <filter name="group_gender" string="Jenis Kelamin" context="{'group_by':'gender'}"/>
+                 </group>-->
+                <!--<searchpanel>
+                    <field name="gender" string="Jenis Kelamin" icon="fa-users" enable_counters="1"/>
+                </searchpanel>-->
+            </search>
+        </field>
+    </record>
+
+    <record id="patients_action" model="ir.actions.act_window">
+        <field name="name">Data Pasien</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.patient</field>
+        <field name="view_mode">tree,kanban,form</field>
+
+        <!--        it works with both filter and group-->
+        <field name="context">{'search_default_filter_pria': 1, 'search_default_filter_wanita': 1,
+            'search_default_group_gender': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Buat Data Pasien !
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_patients"
+              name="Data Pasien"
+              parent="hospital_patient_root"
+              action="patients_action"
+              sequence="20"/>
+</odoo>

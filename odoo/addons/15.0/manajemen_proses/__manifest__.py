@@ -13,6 +13,7 @@
         'security/ir.model.access.csv',
         'views/menu.xml',
         'views/manpros_view.xml',
+        'views/analisis_review_view.xml',
     ],
     'demo': [],
     'application': True,
