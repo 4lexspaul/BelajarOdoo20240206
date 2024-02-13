@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="action_analisis_review" model="ir.actions.act_window">
+   <record id="action_analisis_review" model="ir.actions.act_window">
         <field name="name">Analisis Review</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">manajemen.proses</field>
         <field name="view_mode">tree,form,kanban</field>
-        <field name="context">{'default_metode':'kuantitatif','default_type':'high'}</field>
-        <field name="domain">[('metode', '=', 'kualitatif'), ('type', '=', 'high')]</field>
+        <field name="context">{'default_metode_analisis':'csfs','default_type':'high'}</field>
+        <field name="domain">[('metode', '=', 'csfs'), ('type', '=', 'middle')]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                Create Your Frist Analisis Review !
+                Tujuan Melakukan Analisis Laporan Keuangan Usaha
+Paling tidak ada beberapa tujuan dilakukannya analisis laporan keuangan perusahaan, yaitu adalah:
+
+1. Menilai kinerja manajemen pada tahun berjalan.
+2. Mengetahui perubahan posisi keuangan perusahaan pada periode tertentu.
+3. Sumber informasi untuk mengambil keputusan strategis sebuah perusahaan.
+4. Bahan pertimbangan bagi investor untuk berinvestasi di suatu perusahaan.
+5. Evaluasi kinerja perusahaan, baik dengan perusahaan lain ataupun kondisi perusahaan lintas periode akuntansi.
+6. Memberikan informasi mengenai kesanggupan perusahaan dalam mengembalikan pinjaman serta bunganya.
             </p>
         </field>
     </record>
 
-    <menuitem id="analisis_review"
+   <!-- <menuitem id="analisis_review"
               name="Analisis Review"
               action="action_analisis_review"
               parent="manajemen_proses_menu"
-              sequence="20"/>
+              sequence="20"/>-->
 </odoo>
