@@ -53,7 +53,7 @@
                 <filter name="filter_high" string="High" domain="[('metode', '=', 'high')]"/>
                 <filter name="filter_middle" string="Middle" domain="[('metode', '=', 'middle')]"/>
                 <filter name="filter_low" string="Low" domain="[('metode', '=', 'low')]"/>
-                <separator/>
+                <!--<separator/>-->
                 <filter name="filter_archived" string="Archived" domain="[('active',  '=', False)]"/>
                 <group expand="0" string="Group By">
                     <filter string="Metode" name="group_by_metode" domain="[]" context="{'group_by':'metode'}"/>
