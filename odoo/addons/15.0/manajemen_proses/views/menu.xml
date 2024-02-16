@@ -12,7 +12,6 @@
 
     <menuitem id="main_menu_appointment"
               name="Appointment"
-              action="action_manajemen_appointment"
               parent="manajemen_proses_main_menu"
               sequence="10"/>
 </odoo>

@@ -18,7 +18,7 @@ class ManajemenProses(models.Model):
 
     @api.depends('date_of_birth')
     def _compute_age(self):
-        for rec in sefl:
+        for rec in self:
             today = date.today()
             if rec.date_of_birth:
                 rec.age = today.year - rec.date_of_birth.year
