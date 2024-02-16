@@ -8,7 +8,7 @@
     'sequence': -100,
     'summary': 'Manajemen Proses Sistem',
     'description': """Manajemen Proses Sistem""",
-    'depends': ['base','mail'],
+    'depends': ['base', 'mail'],
     'data': [
         'security/ir.model.access.csv',
         'views/menu.xml',

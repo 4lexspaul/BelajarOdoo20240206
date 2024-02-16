@@ -9,4 +9,3 @@ class ManajemenAppointment(models.Model):
     type = fields.Selection([('high', 'High'), ('middle', 'Middle'), ('low', 'Low')], string='Type', related='manajemen_id.type')
     appointment_time = fields.Datetime(string='Appointment Time', default=fields.Datetime.now)
     booking_date = fields.Date(string='Booking Date', default=fields.Date.context_today)
-
