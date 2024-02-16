@@ -6,7 +6,6 @@
         <field name="res_model">manajemen.proses</field>
         <field name="view_mode">tree,form,kanban</field>
         <field name="context">{'default_metode_analisis':'csfs','default_type':'high'}</field>
-        <field name="domain">[('metode', '=', 'csfs'), ('type', '=', 'middle')]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Tujuan Melakukan Analisis Laporan Keuangan Usaha
@@ -22,7 +21,7 @@ Paling tidak ada beberapa tujuan dilakukannya analisis laporan keuangan perusaha
         </field>
     </record>
 
-   <!-- <menuitem id="analisis_review"
+   <menuitem id="analisis_review"
               name="Analisis Review"
               action="action_analisis_review"
               parent="manajemen_proses_menu"

@@ -9,4 +9,9 @@
               name="Perencanaan"
               parent="manajemen_proses_main_menu"
               sequence="0"/>
+
+    <menuitem id="main_menu_appointment"
+              name="Appointment"
+              parent="manajemen_proses_main_menu"
+              sequence="10"/>
 </odoo>
