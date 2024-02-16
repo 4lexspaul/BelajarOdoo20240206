@@ -5,6 +5,11 @@
             <field name="model">manajemen.appointment</field>
             <field name="arch" type="xml">
                 <tree>
+                    <field name="manajemen_id"/>
+                    <field name="ref"/>
+                    <field name="type"/>
+                    <field name="booking_date"/>
+                    <field name="appointment_time"/>
                 </tree>
             </field>
     </record>
@@ -18,6 +23,7 @@
                     <group>
                         <group>
                             <field name="manajemen_id"/>
+                            <field name="ref"/>
                             <field name="type"/>
                             <field name="booking_date"/>
                         </group>
@@ -25,6 +31,13 @@
                             <field name="appointment_time"/>
                         </group>
                     </group>
+                    <notebook>
+                        <page string="Info" name="info">
+                            <field name="komentar" placeholder="Masukan info nya dong Kak..."/>
+                        </page>
+                        <page string="Masse" name="masse">
+                        </page>
+                    </notebook>
                 </sheet>
                 <div class="oe_chatter">
                         <field name="message_follower_ids" groups="base.group_user"/>
